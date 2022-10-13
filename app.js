@@ -1,25 +1,23 @@
+const path = require ("path")
 const express = require ("express")
-
-require ("dotenv").config()
-
+const cors = require ("cors")
 const morgan = require ("morgan")
 
-const path = require ("path")
-
-const cors = require ("cors")
+const database = require("./connection")
+require ("dotenv").config()
 
 const app = express()
-
-app.use(express.json())
-
-const database = require("./connection")
-
 database()
-
-app.use(require("./src/routes/user.routes"))
 
 const port = process.env.PORT
 
 app.listen(port, ()=>{
     console.log(`Servidor corriendo en: http://localhost:${port}`)
 })
+
+app.use(express.json())
+
+app.use(express.static(path.join(__dirname, 'src/public')));
+
+app.use(require("./src/routes/user.routes"))
+app.use(require("./src/routes/task.routes"))
