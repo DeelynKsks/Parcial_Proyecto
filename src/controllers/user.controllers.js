@@ -24,9 +24,9 @@ ctrlUser.postUser = async (req, res) => {
 }
 
 ctrlUser.getUser = async (req, res) => {
-    const usuarios = await User.find();
+    const username = await User.find();
 
-    return res.json(usuarios);
+    return res.json(username)
 }
 
 ctrlUser.updateUser = async (req, res) => {

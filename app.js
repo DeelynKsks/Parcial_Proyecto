@@ -21,3 +21,4 @@ app.use(express.static(path.join(__dirname, 'src/public')));
 
 app.use(require("./src/routes/user.routes"))
 app.use(require("./src/routes/task.routes"))
+app.use(require("./src/routes/auth.routes"))

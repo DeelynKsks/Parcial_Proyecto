@@ -3,7 +3,8 @@ const { model, Schema } = require("mongoose")
 const UserSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -25,13 +26,5 @@ const UserSchema = new Schema({
     versionKey: false,
     timestamps: true
 })
-
-UserSchema.methods.toJSON = function(){
-    const { password, _id, ...user} = this.toObject()
-
-    user.uid = _id;
-    
-    return user;
-} 
 
 module.exports = model("Users", UserSchema)

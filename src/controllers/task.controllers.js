@@ -1,17 +1,16 @@
 const Tasks = require('../models/task.model');
 ctrlTask = {};
 
-// Me faltan el update y el delete
-
 ctrlTask.createTask = async (req, res) => {
+    const identificador = req.user._id
+
     const { titulo, descripcion } = req.body;
 
     const task = new Tasks({
         titulo,
         descripcion,
-        //userId: req.user._id
+        userId: identificador
     });
-
 
     try {
         const newTask = await task.save();
@@ -28,8 +27,11 @@ ctrlTask.createTask = async (req, res) => {
 }
 
 ctrlTask.getTasks = async (req, res) => {
-    const tasks = await Tasks.find({ userId: req.user._id })
+    userId = req.user._id
+
+    const tasks = await Tasks.find({ userId: userId })
     .populate('userId', ['username','email'])
+
     return res.json(tasks);
 }
 

@@ -17,9 +17,11 @@ const TaskSchema = new Schema({
         type: Boolean,
         default: false
     },
-    // userId: {
-    //     type: Schema.Types.ObjectId, ref: 'Users'
-    // },
+    userId: {
+        type: Schema.ObjectId,
+        ref: 'Users',
+        required: true
+    },
 });
 
 module.exports = model('Tasks', TaskSchema);
