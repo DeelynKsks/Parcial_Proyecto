@@ -24,21 +24,57 @@ ctrlUser.postUser = async (req, res) => {
 }
 
 ctrlUser.getUser = async (req, res) => {
-    const username = await User.find();
 
-    return res.json(username)
+    const foundUser = await User.find({isActive: true});
+
+    return res.json(foundUser)
 }
 
 ctrlUser.updateUser = async (req, res) => {
+    
     const userId = req.params.id
+    console.log(userId)
 
-    const { username, email, isActive, role } = req.body
+    const { username, email, isActive } = req.body
+    
+    const data = { username, email, isActive }
+    console.log(data)
+    
+    try {
+        const dataUpdate = await User.findByIdAndUpdate(userId, data);
 
-    const data = { username, email, isActive, role }
+        if(!dataUpdate){
+            return res.status(400).json({
+                msg: "Ocurrió un error al actualizar el usuario"
+            })
+        }
+
+        return res.json({
+            msg: 'Usuario actualizado correctamente',
+        })
+
+    }catch (error) {
+        return res.status(400).json({
+            msg: "No se pudo actualizar el usuario", error
+        })
+    }
 }
 
 ctrlUser.deleteUser = async (req, res) => {
-    
+
+    try {
+        const userId = req.params.id
+        const softDelete = {isActive: false}
+
+        await User.findByIdAndUpdate(userId, softDelete)
+
+        return res.json({
+            msg: "El usuario se ha eliminado"
+        })
+    } catch (error) {
+        
+    }
+
 }
 
 module.exports = ctrlUser

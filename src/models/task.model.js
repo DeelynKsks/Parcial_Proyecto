@@ -4,6 +4,7 @@ const TaskSchema = new Schema({
     titulo: {
         type: String,
         required: true,
+        unique: true
     },
     descripcion: {
         type: String,
@@ -22,6 +23,9 @@ const TaskSchema = new Schema({
         ref: 'Users',
         required: true
     },
+}, {
+    versionKey: false,
+    timestamps: true
 });
 
 module.exports = model('Tasks', TaskSchema);
