@@ -16,14 +16,3 @@ Luego puede proceder a ejecutar el siguiente comando en la consola
 ```
 npm run dev
 ```
-
----
-
-En el .gitignore se encuentra la carpeta node_modules, y el archivo .env, en el cual tengo como 
-variables de entorno:
-
-```
-PORT = 7000;
-DATABASE = "acá va el link de su base de datos (de MongoDB)"
-SECRET = ""
-```
