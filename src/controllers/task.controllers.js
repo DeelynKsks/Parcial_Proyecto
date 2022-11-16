@@ -1,7 +1,11 @@
+const { validationResult } = require('express-validator');
 const Tasks = require('../models/task.model');
-ctrlTask = {};
+const ctrlTask = {};
+
+
 
 ctrlTask.createTask = async (req, res) => {
+
     const identificador = req.user._id
 
     const { titulo, descripcion } = req.body;
