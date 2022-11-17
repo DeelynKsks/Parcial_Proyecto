@@ -1,10 +1,14 @@
 const { model, Schema } = require('mongoose')
 
 const CoordsSchema = new Schema({
-    lat: {
+    Descripcion: {
+        type: String
+    },
+    Coordenadas: {
         type: Array,
-        length: 2
+        length: 2,
+        required: true
     }
 })
 
-module.exports = model("Coordenadas", CoordsSchema)
+module.exports = model("Coordinates", CoordsSchema)
